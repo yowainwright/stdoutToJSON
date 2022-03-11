@@ -1,14 +1,52 @@
-export type WithWildcards<T> = T & { [key: string]: unknown }
-export type Matcher = { [key: string]: string }
 
 /**
- * executeMatcher
- * @desicription allows more configuration options
+ * stdoutJson 🕸
+ * @description a naive tool useful for outputting stdout as JSON
+ * @notes This is a naive tool, that does a decent job of outputting a stdout string as JSON
+ * - The use-case of a such a tool initially is for testing cli scenarios 👌
+ */
+
+/**
+ * @note matches JSON-like shape of unknown values, etc
+ */
+export type WithWildcards<T> = T & { [key: string]: unknown }
+/**
+ * @note the Matcher shape
+ * @param {value} string a string contain a regex pattern to match
+ * @param {edit} string
+ */
+export type Matcher = {
+  value: string;
+  edit: string;
+};
+
+export const OBJECT_MATCHERS: Matcher[] = [
+  { value: 's+', edit: '' }, // remove spaces
+  { value: ':', edit: '":' } // add double quotes to end of a JSON object key
+  { value: '{', edit: '{"' }, // add double quotes to the beginning of JSON object key
+  { value: ',', edit: ',"' }, // add comma to wrap new data item
+]
+
+export const BOOLEAN_MATCHERS: Matcher[] = [
+  { value: 'true', edit: '"true"' }, // wrap true for JSON parse capability
+	{ value: 'false', edit: '"false"' }, // wrap false for JSON parse capability
+];
+
+export const BROWSER_MATCHERS: Matcher[] = [
+  { value: 'https"', edit: 'https' }, // match https after initial pattern match
+  { value: 'http"', edit: 'http' }, // match http after initial pattern match
+];
+
+const INITIAL_MATCHERS: Matcher[] = OBJECT_MATCHERS.concat.apply(BOOLEAN_MATCHERS, BROWSER_MATCHERS);
+
+/**
+ * matcher
+ * @description allows more configuration options
  * @param {str} string
  * @param {matchers} array
  * @returns {string}
  */
-export function executeMatcher(str, matchers: Matcher[]): string {
+export function matcher(str: string, matchers: Matcher[] = INITIAL_MATCHERS): string {
 	return matchers.reduce(
 		(updatedStr, { value, edit }) =>
 			updatedStr.replace(new RegExp(value, 'g'), edit),
@@ -28,29 +66,15 @@ export function stdoutJson(
 	matchers?: Matcher[],
 ): WithWildcards<unknown> {
 	const jsonLikeString = stdout
-		.split('\n')
-		.map((item) => item.trim())
-		.filter((item) => item !== '')
-		.join('')
-		.replace(/\s+/g, '')
-		.replace(/'/g, '"')
+		.split('\n') // remove new line chars => []
+		.map((item) => item.trim()) // remove whitespace
+		.filter((item) => item !== '') // filter empty array items
+		.join('') // return the modified string
 
-	const stringifiedJSONForParsing = jsonLikeString
-		.replace(/{/g, '{"')
-		.replace(/:/g, '":')
-		.replace(/,/g, ',"')
+  // see the matcher instructions above for detail
+	const stringifiedJSONForParsing = matcher(jsonLikeString, matchers);
 
-	const stringifiedJSONWithCommonMatchers = stringifiedJSONForParsing
-		.replace(/true/g, '"true"')
-		.replace(/false/g, '"false"')
-		.replace(/https"/g, 'https')
-
-	const stringifiedJSON =
-		matchers.length >= 1
-			? executeMatcher(stringifiedJSONWithCommonMatchers, matchers)
-			: stringifiedJSONWithCommonMatchers
-
-	const parsedJSON = JSON.parse(stringifiedJSON)
+	const parsedJSON = JSON.parse(stringifiedJSONForParsing)
 	return parsedJSON
 }
 
