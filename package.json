@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && pnpm transpile",
-    "lint": "eslint src/**/*.ts",
+    "lint": "eslint src/*.ts",
     "prepare": "husky install",
     "prepublishOnly": "pnpm test && pnpm build",
     "release": "release-it",
     "test": "jest",
-    "transpile": "tsc && rollup --config rollup.config.ts",
+    "transpile": "tsc",
     "typecheck": "tsc --noEmit"
   },
   "repository": {
