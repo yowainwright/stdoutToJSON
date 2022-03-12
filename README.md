@@ -1,9 +1,9 @@
-# WIP: stdoutJSON 🕸
+# stdoutJSON 🕸
 
-A naive tool useful for outputting stdout as JSON.
+A naive tool is useful for outputting stdout as JSON.
 
 **This is a naive utility function!**<br> 
-It takes in a string argument **assuming** that it was passed in from an `stdout` output of JSON-like shape. 
+It takes in a string argument **assuming** that it was passed in from an `stdout` output of **JSON-like** shape. 
 From there it attempts to reconstruct a string so that it can be interpreted by `JSON.parse(<costructed-string>)`. 👌
 
 This tool was made for testing stdout output of CLI programs and has no dependencies required in it's distributables.<br>
