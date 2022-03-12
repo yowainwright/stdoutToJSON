@@ -1,4 +1,4 @@
-# WIP: stdoutJSON 🕸
+# stdoutJSON 🕸
 
 A naive tool useful for outputting stdout as JSON.
 
