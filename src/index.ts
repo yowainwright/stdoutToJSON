@@ -6,11 +6,12 @@
  */
 
 /**
- * @note matches JSON-like shape of unknown values, etc
+ * @description matches a JSON-like shape of unknown keys and values
  */
 export type WithWildcards<T> = T & { [key: string]: unknown };
+
 /**
- * @note the Matcher shape
+ * @description the Matcher shape matches a regex input string and expected output string, useful `String.prototype.replace`
  * @param {value} string a string contain a regex pattern to match
  * @param {edit} string
  */
