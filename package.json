@@ -21,7 +21,9 @@
     "stdout",
     "cli",
     "testing",
-    "json"
+    "json",
+    "stdoutJSON",
+    "cli"
   ],
   "author": "Jeff Wainwright <https://jeffry.in> (yowainwright@gmail.com)",
   "license": "MIT",
