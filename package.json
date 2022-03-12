@@ -1,6 +1,6 @@
 {
   "name": "stdoutjson",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "transforms stdout to JSON 🕸",
   "main": "index.js",
   "scripts": {
@@ -62,7 +62,9 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
-    "testPathIgnorePatterns": ["dist"]
+    "testPathIgnorePatterns": [
+      "dist"
+    ]
   },
   "husky": {
     "hooks": {
