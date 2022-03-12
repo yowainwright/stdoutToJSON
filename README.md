@@ -106,7 +106,7 @@ matcher(str: string, matchers: Matcher[] = INITIAL_MATCHERS);
 In the section below, each importable constant is described along with what each of its `matchers` do. All provided is an example on how to create your own Matcher array `Matcher[]`.
 
 | constant | value/edit details | matchers: value ➔ edit |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | **`OBJECT_MATCHER`** | a brute force string sweep<br>matching common JSON-like items and replacing<br>them with proper `JSON.parse` formatting | `' +'` ➔ `""`<br> `" "` ➔ `""`<br> `"'"` ➔ `'"'`<br> `":"` ➔ `'":'`<br> `"{"` ➔ `'{"'`<br> `","` ➔ `',"'` |
 | **`BOOL_MATCHER`** |  matches boolean values<br>and replacing them with expected<br>`JSON.parse` formatting | `true` ➔ `"true"`<br> `false` ➔ `"false"` |
 | **`BROWSER_MATCHER`** | matches browser-specific values<br> and replaces them with expected<br>`JSON.parse` formatting | `'https"'` ➔ `"https"`<br> `'http'` ➔ `"http"` |
