@@ -20,8 +20,9 @@ export type Matcher = {
 };
 
 export const OBJECT_MATCHERS: Matcher[] = [
-  { value: "s+", edit: "" }, // remove +
+  { value: " +", edit: "" }, // remove +
   { value: " ", edit: "" }, // remove ' '
+  { value: "'", edit: '"' }, // replace ' with "
   { value: ":", edit: '":' }, // add double quotes to end of a JSON object key
   { value: "{", edit: '{"' }, // add double quotes to the beginning of JSON object key
   { value: ",", edit: ',"' }, // add comma to wrap new data item
@@ -37,7 +38,8 @@ export const BROWSER_MATCHERS: Matcher[] = [
   { value: 'http"', edit: "http" }, // match http after initial pattern match
 ];
 
-const INITIAL_MATCHERS: Matcher[] = OBJECT_MATCHERS.concat.apply(
+// merge matchers together
+const INITIAL_MATCHERS: Matcher[] = OBJECT_MATCHERS.concat(
   BOOLEAN_MATCHERS,
   BROWSER_MATCHERS
 );
@@ -76,11 +78,12 @@ export function stdoutJSON(
     .map((item) => item.trim()) // remove whitespace
     .filter((item) => item !== "") // filter empty array items
     .join(""); // return the modified string
-  console.log({ jsonLikeString });
+
   // see the matcher instructions above for detail
   const stringifiedJSONForParsing = matcher(jsonLikeString, matchers);
-  console.log({ stringifiedJSONForParsing });
+  // string => JSON
   const parsedJSON = JSON.parse(stringifiedJSONForParsing);
+  // => JSON
   return parsedJSON;
 }
 

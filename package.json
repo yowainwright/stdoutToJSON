@@ -61,7 +61,8 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": ["dist"]
   },
   "husky": {
     "hooks": {
