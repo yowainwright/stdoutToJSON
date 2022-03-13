@@ -6,7 +6,7 @@ A naive tool, useful for outputting stdout as JSON.
 It takes in a string argument **assuming** that it was passed in from an `stdout` output of **JSON-like** shape.
 From there, the utility attempts to reconstruct the string argument so that it can be interpreted by `JSON.parse(<costructed-string>)`. 👌
 
-This tool was made for testing stdout outputs of CLI programs. It has no dependencies required in it's distributables.<br>
+This tool was made for testing stdout outputs of CLI programs. It has no dependencies required in it's distributables and is meant to be installed as a `devDependency`.<br>
 AKA it is secure to use. 🛡
 
 ---
@@ -247,4 +247,4 @@ describe("program", () => {
 
 ---
 
-Feel free to reach/fork with improvements—or if I can help clarify the docs. Thanks! 🤝
+Feel free to reach/fork with improvements—or if I can help clarify the docs. If you have a stdout string that doesn't work, please make an [issue](/issues), or submit a [pull request](/pulls) with a [test](src/__tests__/index.test.ts) and an updated [matcher](src/index.ts). Thanks! 🤝
