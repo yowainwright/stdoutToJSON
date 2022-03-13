@@ -82,8 +82,10 @@ export function stdoutJSON(
 
   // see the matcher instructions above for detail
   const stringifiedJSONForParsing = matcher(jsonLikeString, matchers);
+  console.log(stringifiedJSONForParsing);
   // string => JSON
   const parsedJSON = JSON.parse(stringifiedJSONForParsing);
+  console.log(parsedJSON);
   // => JSON
   return parsedJSON;
 }
