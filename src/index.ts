@@ -16,7 +16,7 @@ export type WithWildcards<T> = T & { [key: string]: unknown };
  * @param {edit} string
  */
 export type Matcher = {
-  value: string;
+  value: string | RegExp;
   edit: string;
 };
 
@@ -27,6 +27,15 @@ export const OBJECT_MATCHERS: Matcher[] = [
   { value: ":", edit: '":' }, // add double quotes to end of a JSON object key
   { value: "{", edit: '{"' }, // add double quotes to the beginning of JSON object key
   { value: ",", edit: ',"' }, // add comma to wrap new data item
+];
+
+export const TRAILING_COMMAS_MATCHERS: Matcher[] = [
+  { value: ',"}', edit: "}" }, // remove trailing comma from weirdly closed object
+  { value: '",]', edit: '"]' }, // remove trailing comma from last string item in an array
+  { value: '"},"]', edit: '"}]' }, // remove trailing comma from last array of objects
+  { value: '"},]', edit: '"}]' }, // remove trailing comma from last object in an array of objects
+  { value: '},}"', edit: '}}"' }, // remove trailing comma from last object in an object
+  { value: '",}', edit: '"}' }, // remove trailing comma from last property in an object
 ];
 
 export const BOOLEAN_MATCHERS: Matcher[] = [
@@ -42,7 +51,8 @@ export const BROWSER_MATCHERS: Matcher[] = [
 // merge matchers together
 const INITIAL_MATCHERS: Matcher[] = OBJECT_MATCHERS.concat(
   BOOLEAN_MATCHERS,
-  BROWSER_MATCHERS
+  BROWSER_MATCHERS,
+  TRAILING_COMMAS_MATCHERS
 );
 
 /**
@@ -85,7 +95,6 @@ export function stdoutJSON(
   console.log(stringifiedJSONForParsing);
   // string => JSON
   const parsedJSON = JSON.parse(stringifiedJSONForParsing);
-  console.log(parsedJSON);
   // => JSON
   return parsedJSON;
 }

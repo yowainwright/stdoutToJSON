@@ -115,6 +115,8 @@ In the section below, each importable constant is described along with what each
 
 To create and use your own Matcher array, import whatever `constants` you want and add to or update them as needed.
 
+Matchers are written in simple regex string format making it easy to update and modify matchers.
+
 ```typescript
 import { INITIAL_MATCHERS, stdoutJSON } from "stdoutJSON";
 
@@ -124,7 +126,6 @@ const MY_MATCHER = INITIAL_MATCHERS.concat([{ value: '<some-matcher-rgx', edit: 
 // execute your customer matchers
 stdoutJSON(stdout, MY_MATCHER);
 ```
-
 ## Types
 
 Listed below are both types used to describe `stdoutJSON` input and output
@@ -160,7 +161,6 @@ export type Matcher = {
 Being able to quickly test CLI commands is imperative to my daily workflow.
 
 `stdoutJSON` allows me to hack CLI programs and quickly test the `stdout` ouput within tests. See the end-to-end example below for the full picture.
-
 ## End-to-end Example
 
 The example below displays a CLI program code block and a code block which tests the CLI program.
