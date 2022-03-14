@@ -6,9 +6,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rimraf dist && pnpm transpile",
+    "commit-msg": "npx --no -- commitlint --edit '$1'",
     "lint": "eslint src/*.ts",
-    "prepare": "husky install",
-    "prepublishOnly": "pnpm test && pnpm build",
+    "pre-commit": "lint-staged && pnpm typecheck",
+    "prepare": "npx husky add .husky/pre-commit 'npm run pre-commit' && npx husky add .husky/commit-msg 'npm run commit-msg'",
+    "prepublishOnly": "pnpm i && pnpm test && pnpm build",
     "release": "release-it",
     "test": "jest",
     "transpile": "tsc",
@@ -41,7 +43,7 @@
     "@typescript-eslint/parser": "^5.14.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.5",
     "release-it": "^14.12.5",
@@ -71,12 +73,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && jest --findRelatedTests && yarn typecheck"
+      "pre-commit": "lint-staged && pnpm typecheck"
     }
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "eslint --fix"
+      "eslint --fix",
+      "jest"
     ]
   },
   "release-it": {
