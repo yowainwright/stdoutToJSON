@@ -9,7 +9,7 @@
     "commit-msg": "commitlint --edit $1",
     "lint": "eslint src/*.ts",
     "pre-commit": "lint-staged && pnpm typecheck",
-    "prepare": "is-ci || npx husky install && npx husky add .husky/pre-commit 'npm run pre-commit' && npx husky add .husky/commit-msg 'npm run commit-msg'",
+    "prepare": "$CI || husky install && npx husky add .husky/pre-commit 'npm run pre-commit' && npx husky add .husky/commit-msg 'npm run commit-msg'",
     "prepublishOnly": "pnpm i && pnpm test && pnpm build",
     "release": "release-it",
     "test": "jest",
