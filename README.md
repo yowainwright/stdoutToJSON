@@ -1,13 +1,12 @@
 # stdoutJSON 🕸
 
-A naive tool, useful for outputting stdout as JSON.
+A naive JavaScript utility function, useful for outputting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) as JSON.
 
-**This is a naive utility!**<br>
-It takes in a string argument **assuming** that it was passed in from an `stdout` output of **JSON-like** shape.
-From there, the utility attempts to reconstruct the string argument so that it can be interpreted by `JSON.parse(<costructed-string>)`. 👌
+**stdoutJSON** takes in a string argument **assuming** that it was passed in from a `stdout` output of **JSON-like** shape.
+From there, the utility attempts to reconstruct the string argument so it can be interpreted by `JSON.parse(<costructed-string>)`. 👌
 
-This tool was made for testing stdout outputs of CLI programs. It has no dependencies required in it's distributables and is meant to be installed as a `devDependency`.<br>
-AKA it is secure to use. 🛡
+This tool was made for testing stdout outputs of CLI programs. It has no dependencies and is meant to be installed as a `devDependency`.<br>
+AKA if you're testing a CLI's interface it's a no-brainer to use for unit testing! Its tiny and secure. 🛡
 
 ---
 
@@ -19,7 +18,7 @@ npm install stdoutJSON -D
 
 ## Basic Usage
 
-The following snippet represents a basic use-case and what the utility to was written to do.
+The following snippet (a CLI unit test) represents a basic use-case and what the **stdoutJSON** was written to do.
 
 ```typescript
 import { exec } from 'child_process';
@@ -46,7 +45,7 @@ describe('cli', () => {
 
 ## Advanced Usage
 
-This example provided insight into using the `matchers` arguement.
+This example provides insight into using the `matchers` argument.
 
 ```typescript
 import { exec } from 'child_process';
@@ -107,9 +106,10 @@ In the section below, each importable constant is described along with what each
 
 | constant | value/edit details | matchers: value ➔ edit |
 | --- | --- | --- |
-| **`OBJECT_MATCHER`** | a brute force string sweep<br>matching common JSON-like items and replacing<br>them with proper `JSON.parse` formatting | `' +'` ➔ `""`<br> `" "` ➔ `""`<br> `"'"` ➔ `'"'`<br> `":"` ➔ `'":'`<br> `"{"` ➔ `'{"'`<br> `","` ➔ `',"'` |
-| **`BOOL_MATCHER`** |  matches boolean values<br>and replacing them with expected<br>`JSON.parse` formatting | `true` ➔ `"true"`<br> `false` ➔ `"false"` |
-| **`BROWSER_MATCHER`** | matches browser-specific values<br> and replaces them with expected<br>`JSON.parse` formatting | `'https"'` ➔ `"https"`<br> `'http'` ➔ `"http"` |
+| **`OBJECT_MATCHERS`** | a brute force string sweep<br>matching common JSON-like items and replacing<br>them with proper `JSON.parse` formatting | `' +'` ➔ `""`<br> `" "` ➔ `""`<br> `"'"` ➔ `'"'`<br> `":"` ➔ `'":'`<br> `"{"` ➔ `'{"'`<br> `","` ➔ `',"'` |
+| **`BOOL_MATCHERS`** |  matches boolean values<br>and replacing them with expected<br>`JSON.parse` formatting | `true` ➔ `"true"`<br> `false` ➔ `"false"` |
+| **`BROWSER_MATCHERS`** | matches browser-specific values<br> and replaces them with expected<br>`JSON.parse` formatting | `'https"'` ➔ `"https"`<br> `'http'` ➔ `"http"` |
+| **`TRAILING_COMMAS_MATCHERS`** | matches trailing commas<br> and removes them for expected<br>`JSON.parse` formatting |  `',"}'` ➔ `"}"`<br>`'",]'` ➔ `'"]'`<br> `'"},"]'` ➔ `'"}]'`<br>`'"},]'` ➔ `'"}]'`<br>`'},}"'` ➔ `'}}"'`<br>`'",}'` ➔ `'"}'` |
 
 ### Creating your own Matcher array (`Matcher[]`)
 
@@ -245,6 +245,21 @@ describe("program", () => {
 });
 ```
 
+## Local Setup
+
+1. Clone
+```
+git clone git@github.com:yowainwright/stdoutJSON.git
+```
+
+2. Setup
+```
+nvm i && pnpm i -g && pnpm i && pnpm prepare
+# nvm or equivalent
+```
+
+3. Write awesomeness + a test. 🚀
+
 ---
 
-Feel free to reach/fork with improvements—or if I can help clarify the docs. If you have a stdout string that doesn't work, please make an [issue](/issues), or submit a [pull request](/pulls) with a [test](src/__tests__/index.test.ts) and an updated [matcher](src/index.ts). Thanks! 🤝
+Feel free to reach/fork with improvements—or if I can help clarify the docs. If you have a stdout string that doesn't work, please make an [issue](/issues), or submit a [pull request](/pulls) with a [test](src/__tests__/index.test.ts) and an updated [matcher](src/index.ts).  See [the setup](#local-setup) instructions. Thanks! 🤝
