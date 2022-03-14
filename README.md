@@ -1,6 +1,6 @@
 # stdoutJSON 🕸
 
-A naive JavaScript utility function, useful for outputting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) as JSON.
+A JavaScript utility function, useful for outputting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) as JSON.
 
 **stdoutJSON** takes in a string argument **assuming** that it was passed in from a `stdout` output of **JSON-like** shape.
 From there, the utility attempts to reconstruct the string argument so it can be interpreted by `JSON.parse(<costructed-string>)`. 👌
