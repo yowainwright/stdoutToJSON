@@ -84,7 +84,7 @@
   },
   "release-it": {
     "git": {
-      "commitMessage": "chore: release v%s"
+      "commitMessage": "chore: release v$npm_package_version"
     }
   }
 }
