@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rimraf dist && pnpm transpile",
-    "commit-msg": "npx --no -- commitlint --edit $1",
+    "commit-msg": "commitlint --edit $1",
     "lint": "eslint src/*.ts",
     "pre-commit": "lint-staged && pnpm typecheck",
     "prepare": "npx husky add .husky/pre-commit 'npm run pre-commit' && npx husky add .husky/commit-msg 'npm run commit-msg'",
