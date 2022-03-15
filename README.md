@@ -13,7 +13,7 @@ AKA if you're testing a CLI's interface it's a no-brainer to use for unit testin
 ## Install
 
 ```sh
-npm install stdoutJSON -D
+npm install stdoutjson -D
 ```
 
 ## Basic Usage
