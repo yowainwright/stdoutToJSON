@@ -22,8 +22,7 @@ The following snippet (a CLI unit test) represents a basic use-case and what the
 
 ```typescript
 import { exec } from 'child_process';
-import { stdoutJSON } from 'stdoutJSON';
-// import stdoutJSON from 'stdoutJSON'; (also works)
+import stdoutJSON from 'stdoutJSON';
 
 describe('cli', () => {
   it('returns stdout of an expected shape', (done) => {
@@ -49,7 +48,7 @@ This example provides insight into using the `matchers` argument.
 
 ```typescript
 import { exec } from 'child_process';
-import { stdoutJSON, INITIAL_MATCHERS } from 'stdoutJSON';
+import stdoutJSON, { INITIAL_MATCHERS } from 'stdoutJSON';
 // import stdoutJSON from 'stdoutJSON'; (also works)
 
 describe('cli', () => {

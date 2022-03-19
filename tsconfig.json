@@ -11,5 +11,5 @@
     "declaration": true,
     "strict": true
   },
-  "exclude": ["**/__tests__/*ts"]
+  "exclude": ["**/__tests__/*ts", "rollup.config.ts"]
 }
