@@ -1,4 +1,4 @@
-# stdoutJSON 🕸
+# stdoutJSON 📇
 
 A JavaScript utility function, useful for outputting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) as JSON.
 
