@@ -22,7 +22,10 @@ The following snippet (a CLI unit test) represents a basic use-case and what the
 
 ```typescript
 import { exec } from 'child_process';
-import stdoutJSON from 'stdoutJSON';
+import { stdoutJSON } from 'stdoutJSON';
+// or, const stdoutJSON from 'stdoutJSON';
+// or, const { stdoutJSON } = require('stdoutJSON')
+// or, const stdoutJSON = require('stdoutJSON').default
 
 describe('cli', () => {
   it('returns stdout of an expected shape', (done) => {
@@ -80,7 +83,9 @@ In the section below, a description table and code blocks are provide to describ
 Importing and function shape detail
 ```typescript
 import { stdoutJSON } from 'stdoutJSON';
-// import stdoutJSON from 'stdoutJSON'; (also works)
+// or, const stdoutJSON from 'stdoutJSON';
+// or, const { stdoutJSON } = require('stdoutJSON')
+// or, const stdoutJSON = require('stdoutJSON').default
 
 // view type details below
 stdoutJSON(stdout: string, matchers: Matcher[] = INITIAL_MATCHERS);
@@ -101,7 +106,7 @@ matcher(str: string, matchers: Matcher[] = INITIAL_MATCHERS);
 
 ## Exposed Constants
 
-In the section below, each importable constant is described along with what each of its `matchers` do. All provided is an example on how to create your own Matcher array `Matcher[]`.
+In the section below, each importable constant is described along with what each of its `matchers` do. Also provided is an example on how to create your own Matcher array `Matcher[]`.
 
 | constant | value/edit details | matchers: value ➔ edit |
 | --- | --- | --- |
@@ -242,6 +247,25 @@ describe("program", () => {
     );
   });
 });
+```
+
+## Debugging
+
+Listed below are some issue with using this tool and how to fix them.
+
+### Types Errors with the returned result
+
+```typescript
+import { Options } from '../types'
+
+...
+
+const { options } = stdoutJSON(stdout)
+const optionsResults = (options as Options)
+// should be good to go!
+
+...
+
 ```
 
 ## Local Setup
