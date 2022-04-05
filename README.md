@@ -103,19 +103,9 @@ import { matcher } from 'stdoutJSON';
 matcher(str: string, matchers: Matcher[] = INITIAL_MATCHERS);
 //returns replaced JSON-like string
 ```
+#### Updating or Creating a Matcher Array (`Matcher[]`)
 
-## Exposed Constants
-
-In the section below, each importable constant is described along with what each of its `matchers` do. Also provided is an example on how to create your own Matcher array `Matcher[]`.
-
-| constant | value/edit details | matchers: value ➔ edit |
-| --- | --- | --- |
-| **`OBJECT_MATCHERS`** | a brute force string sweep<br>matching common JSON-like items and replacing<br>them with proper `JSON.parse` formatting | `' +'` ➔ `""`<br> `" "` ➔ `""`<br> `"'"` ➔ `'"'`<br> `":"` ➔ `'":'`<br> `"{"` ➔ `'{"'`<br> `","` ➔ `',"'` |
-| **`BOOL_MATCHERS`** |  matches boolean values<br>and replacing them with expected<br>`JSON.parse` formatting | `true` ➔ `"true"`<br> `false` ➔ `"false"` |
-| **`BROWSER_MATCHERS`** | matches browser-specific values<br> and replaces them with expected<br>`JSON.parse` formatting | `'https"'` ➔ `"https"`<br> `'http'` ➔ `"http"` |
-| **`TRAILING_COMMAS_MATCHERS`** | matches trailing commas<br> and removes them for expected<br>`JSON.parse` formatting |  `',"}'` ➔ `"}"`<br>`'",]'` ➔ `'"]'`<br> `'"},"]'` ➔ `'"}]'`<br>`'"},]'` ➔ `'"}]'`<br>`'},}"'` ➔ `'}}"'`<br>`'",}'` ➔ `'"}'` |
-
-### Creating your own Matcher array (`Matcher[]`)
+[Matchers](https://github.com/yowainwright/stdoutJSON/blob/master/src/index.ts#L23-L56) can be exposed, overridden, and replaced.
 
 To create and use your own Matcher array, import whatever `constants` you want and add to or update them as needed.
 
