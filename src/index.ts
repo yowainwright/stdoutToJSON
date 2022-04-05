@@ -1,5 +1,5 @@
 /**
- * stdoutJson 🕸
+ * stdoutJson 📇
  * @description a naive tool useful for outputting stdout as JSON
  * @notes This is a naive tool, that does a decent job of outputting a stdout string as JSON
  * - The use-case of a such a tool initially is for testing cli scenarios 👌
@@ -8,7 +8,7 @@
 /**
  * @description matches a JSON-like shape of unknown keys and values
  */
-export type WithWildcards<T> = T & { [key: string]: unknown };
+export type WithWildcards<T> = T & { [key: string]: WithWildcards<T> };
 
 /**
  * @description the Matcher shape matches a regex input string and expected output string, useful `String.prototype.replace`
@@ -67,8 +67,7 @@ export function matcher(
   matchers: Matcher[] = INITIAL_MATCHERS
 ): string {
   return matchers.reduce(
-    (updatedStr, { value, edit }) =>
-      updatedStr.replace(new RegExp(value, "g"), edit),
+    (updatedStr, { value, edit }) => updatedStr.replaceAll(value, edit),
     str
   );
 }
