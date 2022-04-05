@@ -103,7 +103,7 @@ import { matcher } from 'stdoutJSON';
 matcher(str: string, matchers: Matcher[] = INITIAL_MATCHERS);
 //returns replaced JSON-like string
 ```
-### Updating or Creating a Matcher Array (`Matcher[]`)
+#### Updating or Creating a Matcher Array (`Matcher[]`)
 
 [Matchers](https://github.com/yowainwright/stdoutJSON/blob/master/src/index.ts#L23-L56) can be exposed, overridden, and replaced.
 
