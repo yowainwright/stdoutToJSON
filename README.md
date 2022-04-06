@@ -1,37 +1,62 @@
-# stdoutJSON 📇
+# stdoutToJSON 📇
 
-A JavaScript utility function, useful for outputting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) as JSON.
+**stdoutToJSON** is JavaScript utility function, for converting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) (standard output) to JSON.<br>
+This can be useful for transforming `JSON` outputted as `stdout` back to `JSON`.
 
-**stdoutJSON** takes in a string argument **assuming** that it was passed in from a `stdout` output of **JSON-like** shape.
-From there, the utility attempts to reconstruct the string argument so it can be interpreted by `JSON.parse(<costructed-string>)`. 👌
+## Use Case
 
-This tool was made for testing stdout outputs of CLI programs. It has no dependencies and is meant to be installed as a `devDependency`.<br>
+**stdoutToJSON** takes in a `stdout` string of **JSON-like** shape and reconstructs to be parsable by `JSON.parse`. 👌
+
+In essence **stdoutToJSON** takes a `stdout` string argument that looks like this:
+
+```typescript
+  "{\n" +
+  "  options: { isTestingCLI: true },\n" +
+  "  urls: [ 'https://example.com?gclid=test-clickid' ],\n" +
+  "  cookies: [ { name: 'foo', value: '1' } ]\n" +
+  "}\n";
+```
+
+And transforms the `stdout` string to look like this:
+
+```typescript
+{
+  options: { isTestingCLI: "true" },
+  urls: ["https://example.com?gclid=test-clickid"],
+  cookies: [{ name: "foo", value: "1" }],
+}
+```
+
+This tool was made for easily testing stdout outputs of child process executions.<br>
+Here's an [architectural gist](https://gist.github.com/yowainwright/ba8164ad5d968f35ae86e2ba6c91c592) for reference.
+
+## Security
+
+**stdoutToJSON** has no dependencies and is meant to be installed as a `devDependency`.<br>
 AKA if you're testing a CLI's interface it's a no-brainer to use for unit testing! Its tiny and secure. 🛡
-
----
 
 ## Install
 
 ```sh
-npm install stdoutjson -D
+npm install stdoutToJSON -D
 ```
 
 ## Basic Usage
 
-The following snippet (a CLI unit test) represents a basic use-case and what the **stdoutJSON** was written to do.
+The following snippet (a CLI unit test) represents a basic use-case and what the **stdoutToJSON** does.
 
 ```typescript
 import { exec } from 'child_process';
-import { stdoutJSON } from 'stdoutJSON';
-// or, const stdoutJSON from 'stdoutJSON';
-// or, const { stdoutJSON } = require('stdoutJSON')
-// or, const stdoutJSON = require('stdoutJSON').default
+import { stdoutToJSON } from 'stdoutToJSON';
+// or, const stdoutToJSON from 'stdoutToJSON';
+// or, const { stdoutToJSON } = require('stdoutToJSON')
+// or, const stdoutToJSON = require('stdoutToJSON').default
 
 describe('cli', () => {
   it('returns stdout of an expected shape', (done) => {
-    exec(`${<cmd>}`, (_, stdout) => {
-      const { someJSONKey } = stdoutJSON(stdout); // where "someJSONKey" could be any expected key
-      expect(someJSONkey).toBeDefined();
+    exec(`${<sme-cmd> --someJSONKey 'foo' }`, (_, stdout) => {
+      const { someJSONKey } = stdoutToJSON(stdout); // where "someJSONKey" could be any expected key
+      expect(someJSONkey).toEqual('foo');
     });
   });
 });
@@ -51,18 +76,18 @@ This example provides insight into using the `matchers` argument.
 
 ```typescript
 import { exec } from 'child_process';
-import stdoutJSON, { INITIAL_MATCHERS } from 'stdoutJSON';
+import stdoutToJSON, { INITIAL_MATCHERS } from 'stdoutToJSON';
 // import stdoutJSON from 'stdoutJSON'; (also works)
 
 describe('cli', () => {
   it('returns stdout of an expected shape', (done) => {
-    exec(`${<cmd>}`, (_, stdout) => {
+    exec(`${<cmd> --someJSONKey 'foo'}`, (_, stdout) => {
       const UPDATED_MATCHERS = INITIAL_MATCHERS.concat([{ value: '<some-matcher-rgx', edit: '<some-new-value' }])
       /*
        * where "some-matcher-rgx" is a regex pattern and the edit is the expected new value
        */
-      const { someJSONKey } = stdoutJSON(stdout, matchers); // where "someJSONKey" could be any expected key
-      expect(someJSONkey).toBeDefined();
+      const { someJSONKey } = stdoutToJSON(stdout, matchers); // where "someJSONKey" could be any expected key
+      expect(someJSONkey).toEqual('foo');
     });
   });
 });
@@ -75,20 +100,20 @@ In the section below, a description table and code blocks are provide to describ
 
 | function | shape |
 | --- | --- |
-| [`stdoutJSON`](#stdoutjson) | returns a JSON object from a string of JSON-like shape |
+| [`stdoutToJSON`](#stdoutToJSON) | returns a JSON object from a string of JSON-like shape |
 | [`matcher`](#matcher) | returns an iterated string based on a Matcher array's `value` and `edit` value replacements |
 
-### `stdoutJSON`
+### `stdoutToJSON`
 
 Importing and function shape detail
 ```typescript
-import { stdoutJSON } from 'stdoutJSON';
-// or, const stdoutJSON from 'stdoutJSON';
-// or, const { stdoutJSON } = require('stdoutJSON')
-// or, const stdoutJSON = require('stdoutJSON').default
+import { stdoutToJSON } from 'stdoutToJSON';
+// or, const stdoutToJSON from 'stdoutToJSON';
+// or, const { stdoutToJSON } = require('stdoutToJSON')
+// or, const stdoutToJSON = require('stdoutToJSON').default
 
 // view type details below
-stdoutJSON(stdout: string, matchers: Matcher[] = INITIAL_MATCHERS);
+stdoutToJSON(stdout: string, matchers: Matcher[] = INITIAL_MATCHERS);
 // returns JSON
 ```
 
@@ -97,7 +122,7 @@ stdoutJSON(stdout: string, matchers: Matcher[] = INITIAL_MATCHERS);
 Importing and function shape detail
 
 ```typescript
-import { matcher } from 'stdoutJSON';
+import { matcher } from 'stdoutToJSON';
 
 // view type details below
 matcher(str: string, matchers: Matcher[] = INITIAL_MATCHERS);
@@ -105,24 +130,24 @@ matcher(str: string, matchers: Matcher[] = INITIAL_MATCHERS);
 ```
 #### Updating or Creating a Matcher Array (`Matcher[]`)
 
-[Matchers](https://github.com/yowainwright/stdoutJSON/blob/master/src/index.ts#L23-L56) can be exposed, overridden, and replaced.
+[Matchers](https://github.com/yowainwright/stdoutToJSON/blob/master/src/index.ts#L23-L56) can be exposed, overridden, and replaced.
 
 To create and use your own Matcher array, import whatever `constants` you want and add to or update them as needed.
 
 Matchers are written in simple regex string format making it easy to update and modify matchers.
 
 ```typescript
-import { INITIAL_MATCHERS, stdoutJSON } from "stdoutJSON";
+import { INITIAL_MATCHERS, stdoutToJSON } from "stdoutToJSON";
 
 // concat your own matcher (can also be done with spread, etc
 const MY_MATCHER = INITIAL_MATCHERS.concat([{ value: '<some-matcher-rgx', edit: '<some-new-value' }])
 
 // execute your customer matchers
-stdoutJSON(stdout, MY_MATCHER);
+stdoutToJSON(stdout, MY_MATCHER);
 ```
 ## Types
 
-Listed below are both types used to describe `stdoutJSON` input and output
+Listed below are both types used to describe `stdoutToJSON` input and output
 
 ### `WithWildcards`
 
@@ -154,7 +179,7 @@ export type Matcher = {
 
 Being able to quickly test CLI commands is imperative to my daily workflow.
 
-`stdoutJSON` allows me to hack CLI programs and quickly test the `stdout` ouput within tests. See the end-to-end example below for the full picture.
+`stdoutToJSON` allows me to hack CLI programs and quickly test the `stdout` ouput within tests. See the end-to-end example below for the full picture.
 ## End-to-end Example
 
 The example below displays a CLI program code block and a code block which tests the CLI program.
@@ -188,8 +213,10 @@ const explorer = cosmiconfigSync("config");
  */
 export function action(options: Options = {}): void {
   const { config: defaultConfig = {} } = explorer.search() || {};
+  const urls = options?.urls || defaultConfig?.urls || [];
+  const config = options?.config || defaultConfig;
   if (options.isTestingCLI) {
-    console.info({ options });
+    console.log({ urls, config });
     return;
   }
   script({ options });
@@ -209,15 +236,15 @@ export { program };
 
 ### Example CLI Program Test
 
-Because the CLI program exits and outputs `stdout`, the `stdout` output can be tested! However, `stdout` produces an awkward string if the `console.log` contains more than a simple string. This is the the big initial use-case for `stdoutJSON`.
+Because the CLI program exits and outputs `stdout`, the `stdout` output can be tested! However, `stdout` produces an awkward string if the `console.log` contains more than a simple string. This is the the big initial use-case for `stdoutToJSON`.
 
-Using `stdoutJSON` we can do a deep test of the `stdout` output!
+Using `stdoutToJSON` we can do a deep test of the `stdout` output!
 
 This makes it easy the test the CLI itself in an efficient way!
 
 ```typescript
 import { exec } from "child_process";
-import { stdoutJSON } from "stdoutJSON";
+import { stdoutToJSON } from "stdoutToJSON";
 
 describe("program", () => {
   it("works with defaults", (done) => {
@@ -229,9 +256,46 @@ describe("program", () => {
           return;
         }
 
-        const { options } =
+        const { config, url } =
           convertStdoutToJson(stdout);
-        expect(options).toEqual(<someJSON>);
+        expect(url).toEqual([]);
+        expect(config).toEqual({});
+        done();
+      }
+    );
+  });
+
+  it("prefers config urls to an empty array", (done) => {
+    exec(
+      `ts-node ../src/program.ts --isTestingCLI --config .configrc`,
+      (err, stdout) => {
+        if (err) {
+          done();
+          return;
+        }
+
+        const { config, urls } =
+          convertStdoutToJson(stdout);
+        expect(urls).toEqual(['https://localhost:3000/', 'https://test.com']);
+        expect(config.urls).toEqual(['https://localhost:3000/', 'https://test.com']);
+        done();
+      }
+    );
+  });
+
+  it("prefers urls options over config.urls or an empty array", (done) => {
+    exec(
+      `ts-node ../src/program.ts --isTestingCLI --config .configrc --urls 'https://foo.com' 'https://bar.com'`,
+      (err, stdout) => {
+        if (err) {
+          done();
+          return;
+        }
+
+        const { config, urls } =
+          convertStdoutToJson(stdout);
+        expect(urls).toEqual(['https://foo.com', 'https://bar.com']);
+        expect(config.urls).toEqual(['https://localhost:3000/', 'https://test.com']);
         done();
       }
     );
@@ -250,7 +314,7 @@ import { Options } from '../types'
 
 ...
 
-const { options } = stdoutJSON(stdout)
+const { options } = stdoutToJSON(stdout)
 const optionsResults = (options as Options)
 // should be good to go!
 
@@ -262,7 +326,7 @@ const optionsResults = (options as Options)
 
 1. Clone
 ```
-git clone git@github.com:yowainwright/stdoutJSON.git
+git clone git@github.com:yowainwright/stdoutToJSON.git
 ```
 
 2. Setup
@@ -273,6 +337,15 @@ nvm i && pnpm i -g && pnpm i && pnpm prepare
 
 3. Write awesomeness + a test. 🚀
 
+## Roadmap
+
+- [ ] Make this project easy to understand for new potential people that might use it
+- [ ] Improve tests and make tests readable
+- [ ] Provide a full example
+- [ ] Improve the linked video
+
 ---
+
+The name was changed from `stdoutJSON` to `stdoutToJSON`. Thanks to [OolongHell](https://www.reddit.com/r/node/comments/tx8sxo/stdoutjson_a_simple_node_js_utility_to_make/i3njq3w/?context=3) and [Will Jacobson](https://github.com/willzjacobson) for assistance in making the reasoning and use case of this utility clearer. I still have a ways to go.
 
 Feel free to reach/fork with improvements—or if I can help clarify the docs. If you have a stdout string that doesn't work, please make an [issue](/issues), or submit a [pull request](/pulls) with a [test](src/__tests__/index.test.ts) and an updated [matcher](src/index.ts).  See [the setup](#local-setup) instructions. Thanks! 🤝

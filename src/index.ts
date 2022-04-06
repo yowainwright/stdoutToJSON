@@ -1,5 +1,5 @@
 /**
- * stdoutJson 📇
+ * stdoutToJSON 📇
  * @description a naive tool useful for outputting stdout as JSON
  * @notes This is a naive tool, that does a decent job of outputting a stdout string as JSON
  * - The use-case of a such a tool initially is for testing cli scenarios 👌
@@ -73,13 +73,13 @@ export function matcher(
 }
 
 /**
- * stdoutJson
+ * stdoutToJSON
  * @description turns stdout into a JSON object
  * @param {stdout} string
  * @param {matchers} array
  * @returns {object} a JSON object of unknown type
  */
-export function stdoutJSON(
+export function stdoutToJSON(
   stdout: string,
   matchers?: Matcher[]
 ): WithWildcards<unknown> {
@@ -97,4 +97,4 @@ export function stdoutJSON(
   return parsedJSON;
 }
 
-export default stdoutJSON;
+export default stdoutToJSON;

@@ -1,4 +1,4 @@
-import { stdoutJSON } from "../index";
+import { stdoutToJSON } from "../index";
 
 export const STDOUT_MOCK =
   "{\n" +
@@ -22,11 +22,11 @@ export const DEFAULT_EXPECTATION = {
 
 describe("stringifiedJSON", () => {
   it("default", () => {
-    const result = stdoutJSON(STDOUT_MOCK);
+    const result = stdoutToJSON(STDOUT_MOCK);
     expect(result).toEqual(DEFAULT_EXPECTATION);
   });
   it("works with trailing commas", () => {
-    const result = stdoutJSON(STDOUT_TRAILING_COMMA_MOCK);
+    const result = stdoutToJSON(STDOUT_TRAILING_COMMA_MOCK);
     expect(result).toEqual(DEFAULT_EXPECTATION);
   });
 });
