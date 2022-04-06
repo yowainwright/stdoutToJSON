@@ -1,4 +1,4 @@
-name: stdoutJSON
+name: stdoutToJSON
 
 on:
   push:
