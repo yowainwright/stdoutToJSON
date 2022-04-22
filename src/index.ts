@@ -67,7 +67,8 @@ export function matcher(
   matchers: Matcher[] = INITIAL_MATCHERS
 ): string {
   return matchers.reduce(
-    (updatedStr, { value, edit }) => updatedStr.replaceAll(value, edit),
+    (updatedStr, { value, edit }) =>
+      updatedStr.replace(new RegExp(value, "g"), edit),
     str
   );
 }
