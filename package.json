@@ -1,6 +1,6 @@
 {
   "name": "stdouttojson",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "transforms stdout to JSON 📇",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
