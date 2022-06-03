@@ -1,3 +1,5 @@
+import { test, it, expect } from "vitest";
+
 import { stdoutToJSON } from "../index";
 
 export const STDOUT_MOCK =
@@ -20,7 +22,7 @@ export const DEFAULT_EXPECTATION = {
   cookies: [{ name: "foo", value: "1" }],
 };
 
-describe("stringifiedJSON", () => {
+test("stringifiedJSON", () => {
   it("default", () => {
     const result = stdoutToJSON(STDOUT_MOCK);
     expect(result).toEqual(DEFAULT_EXPECTATION);
