@@ -57,7 +57,7 @@
     "rollup": "^2.70.1",
     "tslib": "^2.4.0",
     "typescript": "^4.6.2",
-    "vitest": "^0.13.1"
+    "vitest": "^0.14.1"
   },
   "commitlint": {
     "extends": [
