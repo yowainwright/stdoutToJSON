@@ -26,7 +26,7 @@ export const OBJECT_MATCHERS: Matcher[] = [
   { value: "'", edit: '"' }, // replace ' with "
   { value: ":", edit: '":' }, // add double quotes to end of a JSON object key
   { value: "{", edit: '{"' }, // add double quotes to the beginning of JSON object key
-  // { value: ",", edit: ',"' }, // add comma to wrap new data item
+  { value: ",", edit: ',"' }, // add comma to wrap new data item
 ];
 
 export const TRAILING_COMMAS_MATCHERS: Matcher[] = [
@@ -54,7 +54,8 @@ const EXTRA_QUOTES_MATCHERS: Matcher[] = [{ value: '",""', edit: ',"' }];
 const INITIAL_MATCHERS: Matcher[] = OBJECT_MATCHERS.concat(
   BOOLEAN_MATCHERS,
   BROWSER_MATCHERS,
-  TRAILING_COMMAS_MATCHERS
+  TRAILING_COMMAS_MATCHERS,
+  EXTRA_QUOTES_MATCHERS
 );
 
 /**
