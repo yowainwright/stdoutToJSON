@@ -48,7 +48,7 @@ export const BROWSER_MATCHERS: Matcher[] = [
   { value: 'http"', edit: "http" }, // match http after initial pattern match
 ];
 
-const EXTRA_QUOTES_MATCHERS: Matcher[] = [{ value: '",""', edit: ',"' }];
+const EXTRA_QUOTES_MATCHERS: Matcher[] = [{ value: '",""', edit: '","' }];
 
 // merge matchers together
 const INITIAL_MATCHERS: Matcher[] = OBJECT_MATCHERS.concat(
