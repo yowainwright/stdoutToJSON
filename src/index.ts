@@ -26,7 +26,7 @@ export const OBJECT_MATCHERS: Matcher[] = [
   { value: "'", edit: '"' }, // replace ' with "
   { value: ":", edit: '":' }, // add double quotes to end of a JSON object key
   { value: "{", edit: '{"' }, // add double quotes to the beginning of JSON object key
-  { value: ",", edit: ',"' }, // add comma to wrap new data item
+  // { value: ",", edit: ',"' }, // add comma to wrap new data item
 ];
 
 export const TRAILING_COMMAS_MATCHERS: Matcher[] = [
@@ -47,6 +47,8 @@ export const BROWSER_MATCHERS: Matcher[] = [
   { value: 'https"', edit: "https" }, // match https after initial pattern match
   { value: 'http"', edit: "http" }, // match http after initial pattern match
 ];
+
+const EXTRA_QUOTES_MATCHERS: Matcher[] = [{ value: '",""', edit: ',"' }];
 
 // merge matchers together
 const INITIAL_MATCHERS: Matcher[] = OBJECT_MATCHERS.concat(
