@@ -61,7 +61,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.4.0",
     "typescript": "^4.6.2",
-    "vitest": "^0.17.1"
+    "vitest": "^0.18.0"
   },
   "commitlint": {
     "extends": [
