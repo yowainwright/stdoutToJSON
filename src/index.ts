@@ -27,6 +27,7 @@ export const OBJECT_MATCHERS: Matcher[] = [
   { value: ":", edit: '":' }, // add double quotes to end of a JSON object key
   { value: "{", edit: '{"' }, // add double quotes to the beginning of JSON object key
   { value: ",", edit: ',"' }, // add comma to wrap new data item
+  { value: '{"}', edit: '{}' }, // remove extra double quotes from empty JSON object
 ];
 
 export const TRAILING_COMMAS_MATCHERS: Matcher[] = [
@@ -67,11 +68,16 @@ const INITIAL_MATCHERS: Matcher[] = OBJECT_MATCHERS.concat(
  */
 export function matcher(
   str: string,
-  matchers: Matcher[] = INITIAL_MATCHERS
+  matchers: Matcher[] | null = INITIAL_MATCHERS,
+  debug = false
 ): string {
-  return matchers.reduce(
-    (updatedStr, { value, edit }) =>
-      updatedStr.replace(new RegExp(value, "g"), edit),
+  const updatedMatchers = matchers === null ? INITIAL_MATCHERS : matchers;
+  return updatedMatchers.reduce(
+    (updatedStr, { value, edit }) => {
+      const update = updatedStr.replace(new RegExp(value, "g"), edit);
+      if (debug) console.debug({ value, edit, update });
+      return update;
+    },
     str
   );
 }
@@ -81,11 +87,13 @@ export function matcher(
  * @description turns stdout into a JSON object
  * @param {stdout} string
  * @param {matchers} array
+ * @param {debug} string
  * @returns {object} a JSON object of unknown type
  */
 export function stdoutToJSON(
   stdout: string,
-  matchers?: Matcher[]
+  matchers?: Matcher[] | null,
+  debug = false,
 ): WithWildcards<unknown> {
   const jsonLikeString = stdout
     .split("\n") // remove new line chars => []
@@ -93,11 +101,15 @@ export function stdoutToJSON(
     .filter((item) => item !== "") // filter empty array items
     .join(""); // return the modified string
 
+  if (debug) console.debug({ jsonLikeString });
+
   // see the matcher instructions above for detail
-  const stringifiedJSONForParsing = matcher(jsonLikeString, matchers);
+  const stringifiedJSONForParsing = matcher(jsonLikeString, matchers, debug);
   // string => JSON
+  if (debug) console.debug({ stringifiedJSONForParsing });
   const parsedJSON = JSON.parse(stringifiedJSONForParsing);
   // => JSON
+  if (debug) console.debug({ parsedJSON });
   return parsedJSON;
 }
 

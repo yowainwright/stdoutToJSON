@@ -68,7 +68,14 @@ describe('cli', () => {
 | argument | required or optional | description |
 | --- | --- | --- |
 | **`stdout`** | `required` | a string of JSON-like shape |
-| **`matchers`** | `optional` | an optional array to perform further string operations |
+| **`matchers`** | `optional` | an optional array to perform further string operations \***or** `null` |
+| **`debug`** | `optional` | an optional boolean to enable debugging |
+
+\***nullish matcher** arguments can be used to enable debugging with the default matchers.
+
+```
+stoutToJSON('{"foo": "bar"}', null, true); // enables debugging with standard matchers
+```
 
 ## Advanced Usage
 
@@ -340,7 +347,6 @@ nvm i && pnpm i -g && pnpm i && pnpm prepare
 ## Roadmap
 
 - [ ] Make this project easy to understand for new potential people that might use it
-- [ ] Improve tests and make tests readable
 - [ ] Provide a full example
 - [ ] Improve the linked video
 
