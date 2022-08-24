@@ -1,6 +1,6 @@
-import { test, it, expect } from "vitest";
+import { test, expect } from "vitest";
 
-import { stdoutToJSON } from "../index";
+import { stdoutToJSON } from "../src/index";
 
 export const STDOUT_MOCK =
   "{\n" +
@@ -31,20 +31,24 @@ export const DEFAULT_EXPECTATION = {
   cookies: [{ name: "foo", value: "1" }],
 };
 
-test("stringifiedJSON", () => {
-  it("default", () => {
-    const result = stdoutToJSON(STDOUT_MOCK);
-    expect(result).toEqual(DEFAULT_EXPECTATION);
+test("stringifiedJSON default", () => {
+  const result = stdoutToJSON(STDOUT_MOCK);
+  expect(result).toEqual(DEFAULT_EXPECTATION);
+});
+
+test("works with trailing commas", () => {
+  const result = stdoutToJSON(STDOUT_ARRAY_MOCK);
+  expect(result).toEqual({
+    ...DEFAULT_EXPECTATION, items: ['item1', 'item2'], test: 'true'
   });
-  it("works with trailing commas", () => {
-    const result = stdoutToJSON(STDOUT_ARRAY_MOCK);
-    expect(result).toEqual(DEFAULT_EXPECTATION);
-  });
-  it("works with simple arrays", () => {
-    const result = stdoutToJSON(STDOUT_TRAILING_COMMA_MOCK);
-    expect(result).toEqual({
-      ...DEFAULT_EXPECTATION,
-      items: ["item1", "item2"],
-    });
-  });
+});
+
+test("works with simple arrays", () => {
+  const result = stdoutToJSON(STDOUT_TRAILING_COMMA_MOCK);
+  expect(result).toEqual(DEFAULT_EXPECTATION);
+});
+
+test("works with simple 1 line objects", () => {
+  const result = stdoutToJSON('{ options: { isTestingCLI: true }, config: {} }\n');
+  expect(result).toEqual({ "config": {}, "options": { "isTestingCLI": "true" } });
 });
