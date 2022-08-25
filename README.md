@@ -355,7 +355,7 @@ nvm i && pnpm i -g && pnpm i && pnpm prepare
 
 ## Videos
 
-[[![Loom video](https://cdn.loom.com/sessions/thumbnails/6b7082bd802b43618646242477701def-with-play.gif)](https://loom.com/share/6b7082bd802b43618646242477701def)
+[![Loom video](https://cdn.loom.com/sessions/thumbnails/6b7082bd802b43618646242477701def-with-play.gif)](https://loom.com/share/6b7082bd802b43618646242477701def)
 
 ## Roadmap
 
