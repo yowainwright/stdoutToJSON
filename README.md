@@ -73,7 +73,7 @@ describe('cli', () => {
 
 \***nullish matcher** arguments can be used to enable debugging with the default matchers.
 
-```
+```typescript
 stoutToJSON('{"foo": "bar"}', null, true); // enables debugging with standard matchers
 ```
 

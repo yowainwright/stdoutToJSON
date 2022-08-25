@@ -52,3 +52,8 @@ test("works with simple 1 line objects", () => {
   const result = stdoutToJSON('{ options: { isTestingCLI: true }, config: {} }\n');
   expect(result).toEqual({ "config": {}, "options": { "isTestingCLI": "true" } });
 });
+
+test("works with a string only", () => {
+  const result = stdoutToJSON('test\n', null, true);
+  expect(result).toEqual('test');
+});
