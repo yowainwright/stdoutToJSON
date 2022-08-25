@@ -62,3 +62,10 @@ test("works with an array only", () => {
   const result = stdoutToJSON('["test",]\n', null, true);
   expect(result).toEqual(["test"]);
 });
+
+/**
+ * @todos
+ * - heavy json test
+ * - 2 dimensional array test/update
+ * - array of objects test/update
+ */
