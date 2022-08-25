@@ -329,6 +329,8 @@ const optionsResults = (options as Options)
 
 ```
 
+---
+
 ## Local Setup
 
 1. Clone
@@ -343,6 +345,11 @@ nvm i && pnpm i -g && pnpm i && pnpm prepare
 ```
 
 3. Write awesomeness + a test. 🚀
+
+
+## Videos
+
+[[![Loom video](https://cdn.loom.com/sessions/thumbnails/6b7082bd802b43618646242477701def-with-play.gif)](https://loom.com/share/6b7082bd802b43618646242477701def)
 
 ## Roadmap
 
