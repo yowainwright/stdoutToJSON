@@ -1,5 +1,11 @@
 # stdoutToJSON 📇
 
+![Typed with TypeScript](https://flat.badgen.net/badge/icon/Typed?icon=typescript&label&labelColor=blue&color=555555)
+[![npm version](https://badge.fury.io/js/stdouttojson.svg)](https://badge.fury.io/js/stdouttojson)
+![ci](https://github.com/yowainwright/stdouttojson/actions/workflows/ci.yml/badge.svg)
+[![Github](https://badgen.net/badge/icon/github?icon=github&label&color=grey)](https://github.com/yowainwright/stdouttojson)
+![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fyowainwright%2Fstdouttojson)
+
 **stdoutToJSON** is JavaScript utility function, for converting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) (standard output) to JSON.<br>
 This can be useful for transforming `JSON` outputted as `stdout` back to `JSON`.
 
