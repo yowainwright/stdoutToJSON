@@ -37,6 +37,7 @@ export const TRAILING_COMMAS_MATCHERS: Matcher[] = [
   { value: '"},]', edit: '"}]' }, // remove trailing comma from last object in an array of objects
   { value: '},}"', edit: '}}"' }, // remove trailing comma from last object in an object
   { value: '",}', edit: '"}' }, // remove trailing comma from last property in an object
+  { value: '","]', edit: '"]' }, // remove trailing comma from last string item in an array
 ];
 
 export const BOOLEAN_MATCHERS: Matcher[] = [

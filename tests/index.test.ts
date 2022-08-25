@@ -57,3 +57,8 @@ test("works with a string only", () => {
   const result = stdoutToJSON('test\n', null, true);
   expect(result).toEqual('test');
 });
+
+test("works with an array only", () => {
+  const result = stdoutToJSON('["test",]\n', null, true);
+  expect(result).toEqual(["test"]);
+});
