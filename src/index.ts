@@ -94,7 +94,7 @@ export function stdoutToJSON(
   stdout: string,
   matchers?: Matcher[] | null,
   debug = false,
-): WithWildcards<unknown> {
+): WithWildcards<unknown> | string {
   const jsonLikeString = stdout
     .split("\n") // remove new line chars => []
     .map((item) => item.trim()) // remove whitespace
@@ -107,10 +107,14 @@ export function stdoutToJSON(
   const stringifiedJSONForParsing = matcher(jsonLikeString, matchers, debug);
   // string => JSON
   if (debug) console.debug({ stringifiedJSONForParsing });
-  const parsedJSON = JSON.parse(stringifiedJSONForParsing);
   // => JSON
-  if (debug) console.debug({ parsedJSON });
-  return parsedJSON;
+  const isObject = ['{', '['].some(item => stringifiedJSONForParsing.includes(item));
+  if (isObject) {
+    const parsedJSON = JSON.parse(stringifiedJSONForParsing);
+    if (debug) console.debug({ parsedJSON });
+    return parsedJSON;
+  }
+  return stringifiedJSONForParsing;
 }
 
 export default stdoutToJSON;
