@@ -39,7 +39,7 @@
   "bugs": {
     "url": "https://github.com/yowainwright/stdoutToJSON/issues"
   },
-  "homepage": "https://github.com/yowainwright/stdoutToJSON#readme",
+  "homepage": "https://loom.com/share/6b7082bd802b43618646242477701def",
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
