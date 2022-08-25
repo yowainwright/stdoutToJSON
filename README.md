@@ -346,9 +346,9 @@ nvm i && pnpm i -g && pnpm i && pnpm prepare
 
 ## Roadmap
 
-- [ ] Make this project easy to understand for new potential people that might use it
-- [ ] Provide a full example
-- [ ] Improve the linked video
+- Make this project easy to understand for new potential people that might use it
+- Provide a full example
+- Improve the linked video
 
 ---
 
