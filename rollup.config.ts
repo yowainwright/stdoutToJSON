@@ -1,4 +1,4 @@
-import resolve from "@rollup/plugin-node-resolve";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
@@ -21,8 +21,6 @@ const banner = `/**
 **/`;
 
 const plugins = [
-  resolve(),
-  commonjs(),
   typescript({
     tsconfig: false,
     lib: ["esnext", "dom"],
@@ -31,17 +29,19 @@ const plugins = [
     resolveJsonModule: true,
     removeComments: true,
   }),
+  nodeResolve(),
+  commonjs(),
   terser(),
 ];
 
 export default {
   input: "src/index.ts",
-  plugins,
   output: {
     banner,
     file: "dist/index.js",
     format: "umd",
-    name: "stdoutjson",
+    name: "stdouttojson",
     exports: "named",
   },
+  plugins,
 };
