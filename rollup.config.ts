@@ -1,4 +1,4 @@
-import { nodeResolve } from "@rollup/plugin-node-resolve";
+import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
@@ -22,11 +22,11 @@ const banner = `/**
 **/`;
 
 const plugins = [
+  resolve(),
+  commonjs(),
   typescript({
     tsconfig: "tsconfig.json",
   }),
-  nodeResolve(),
-  commonjs(),
   terser(),
 ];
 
