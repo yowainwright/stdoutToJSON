@@ -19,7 +19,7 @@
     "prepublishOnly": "pnpm i && pnpm test && pnpm build",
     "release": "release-it",
     "test": "vitest run",
-    "transpile": "tsc && rollup --config rollup.config.ts",
+    "transpile": "tsc && rollup --config rollup.config.ts --configPlugin typescript",
     "typecheck": "tsc --noEmit",
     "update": "codependence --update"
   },
