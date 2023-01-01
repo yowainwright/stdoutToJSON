@@ -20,7 +20,8 @@
     "release": "release-it",
     "test": "vitest run",
     "transpile": "tsc && rollup --config rollup.config.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "update": "codependence --update"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
     "@types/node": "^18.8.5",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
+    "codependence": "^0.2.6",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
