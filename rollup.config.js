@@ -3,16 +3,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import json from "./package.json" assert { type: 'json' };
-
-const {
-  author,
-  description,
-  homepage,
-  license,
-  name,
-  version,
-} = json;
-
+const { author, description, homepage, license, name, version, } = json;
 const banner = `/**
   ${name} - ${description}
   @version v${version}
@@ -20,24 +11,22 @@ const banner = `/**
   @author ${author}
   @license ${license}
 **/`;
-
 const plugins = [
-  typescript({
-    tsconfig: "tsconfig.json",
-  }),
-  nodeResolve(),
-  commonjs(),
-  terser(),
+    typescript({
+        tsconfig: "tsconfig.json",
+    }),
+    nodeResolve(),
+    commonjs(),
+    terser(),
 ];
-
 export default {
-  input: "src/index.ts",
-  output: {
-    banner,
-    file: "dist/index.js",
-    format: "umd",
-    name: "stdouttojson",
-    exports: "named",
-  },
-  plugins,
+    input: "src/index.ts",
+    output: {
+        banner,
+        file: "dist/index.js",
+        format: "umd",
+        name: "stdouttojson",
+        exports: "named",
+    },
+    plugins,
 };
