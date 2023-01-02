@@ -6,14 +6,17 @@
 [![Github](https://badgen.net/badge/icon/github?icon=github&label&color=grey)](https://github.com/yowainwright/stdouttojson)
 ![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fyowainwright%2Fstdouttojson)
 
-**stdoutToJSON** is JavaScript utility function, for converting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) (standard output) to JSON.<br>
-This can be useful for transforming `JSON` outputted as `stdout` back to `JSON`.
+**stdoutToJSON** is JavaScript utility for converting [stdout](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)) to JSON.<br>
+This is useful for using `JSON` which has been output as `stdout`.
 
-## Use Case
+---
 
-**stdoutToJSON** takes in a `stdout` string of **JSON-like** shape and reconstructs to be parsable by `JSON.parse`. 👌
+## Why Use _stdoutToJSON_?
 
-In essence **stdoutToJSON** takes a `stdout` string argument that looks like this:
+**stdoutToJSON** takes in a `stdout` string of **JSON-like** shape and reconstructs to be parsable by `JSON.parse`. 👌<br>
+**_This is very useful for testing CLI stdout outputs!_**
+
+**_For example, say you have some `stdout` like so._**
 
 ```typescript
   "{\n" +
@@ -23,7 +26,18 @@ In essence **stdoutToJSON** takes a `stdout` string argument that looks like thi
   "}\n";
 ```
 
-And transforms the `stdout` string to look like this:
+**_With **stdoutToJSON**, you can pass that `stdout` as an argument!_**
+
+```typescript
+const stdout = "{\n" +
+  "  options: { isTestingCLI: true },\n" +
+  "  urls: [ 'https://example.com?gclid=test-clickid' ],\n" +
+  "  cookies: [ { name: 'foo', value: '1' } ]\n" +
+  "}\n";
+const json = stdoutToJSON(stdout);
+```
+
+**_And you will be get usable JSON!!_**
 
 ```typescript
 {
@@ -33,19 +47,9 @@ And transforms the `stdout` string to look like this:
 }
 ```
 
-This tool was made for easily testing stdout outputs of child process executions.<br>
-Here's an [architectural gist](https://gist.github.com/yowainwright/ba8164ad5d968f35ae86e2ba6c91c592) for reference.
+For more detail, here's an [architectural gist](https://gist.github.com/yowainwright/ba8164ad5d968f35ae86e2ba6c91c592) for reference.
 
-## Security
-
-**stdoutToJSON** has no dependencies and is meant to be installed as a `devDependency`.<br>
-AKA if you're testing a CLI's interface it's a no-brainer to use for unit testing! Its tiny and secure. 🛡
-
-## Install
-
-```sh
-npm install stdoutToJSON -D
-```
+---
 
 ## Basic Usage
 
@@ -69,6 +73,8 @@ describe('cli', () => {
 
 ```
 
+---
+
 ## Arguments
 
 | argument | required or optional | description |
@@ -82,6 +88,8 @@ describe('cli', () => {
 ```typescript
 stoutToJSON('{"foo": "bar"}', null, true); // enables debugging with standard matchers
 ```
+
+---
 
 ## Advanced Usage
 
@@ -106,6 +114,8 @@ describe('cli', () => {
 });
 
 ```
+
+---
 
 ## Exposed Functions
 
@@ -158,6 +168,9 @@ const MY_MATCHER = INITIAL_MATCHERS.concat([{ value: '<some-matcher-rgx', edit: 
 // execute your customer matchers
 stdoutToJSON(stdout, MY_MATCHER);
 ```
+
+---
+
 ## Types
 
 Listed below are both types used to describe `stdoutToJSON` input and output
@@ -188,6 +201,9 @@ export type Matcher = {
   edit: string;
 };
 ```
+
+---
+
 ## Synopsis
 
 Being able to quickly test CLI commands is imperative to my daily workflow.
@@ -316,6 +332,8 @@ describe("program", () => {
 });
 ```
 
+---
+
 ## Debugging
 
 Listed below are some issue with using this tool and how to fix them.
@@ -337,6 +355,13 @@ const optionsResults = (options as Options)
 
 ---
 
+## Security
+
+**stdoutToJSON** has no dependencies and is meant to be installed as a `devDependency`.<br>
+AKA if you're testing a CLI's interface it's a no-brainer to use for unit testing! Its tiny and secure. 🛡
+
+---
+
 ## Local Setup
 
 1. Clone
@@ -352,10 +377,13 @@ nvm i && pnpm i -g && pnpm i && pnpm prepare
 
 3. Write awesomeness + a test. 🚀
 
+---
 
 ## Videos
 
 [![Loom video](https://cdn.loom.com/sessions/thumbnails/6b7082bd802b43618646242477701def-with-play.gif)](https://loom.com/share/6b7082bd802b43618646242477701def)
+
+---
 
 ## Roadmap
 
@@ -368,3 +396,7 @@ nvm i && pnpm i -g && pnpm i && pnpm prepare
 The name was changed from `stdoutJSON` to `stdoutToJSON`. Thanks to [OolongHell](https://www.reddit.com/r/node/comments/tx8sxo/stdoutjson_a_simple_node_js_utility_to_make/i3njq3w/?context=3) and [Will Jacobson](https://github.com/willzjacobson) for assistance in making the reasoning and use case of this utility clearer. I still have a ways to go.
 
 Feel free to reach/fork with improvements—or if I can help clarify the docs. If you have a stdout string that doesn't work, please make an [issue](/issues), or submit a [pull request](/pulls) with a [test](src/__tests__/index.test.ts) and an updated [matcher](src/index.ts).  See [the setup](#local-setup) instructions. Thanks! 🤝
+
+---
+
+Made by @yowainwright, MIT 2022
