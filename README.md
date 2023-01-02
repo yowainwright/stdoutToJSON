@@ -399,4 +399,4 @@ Feel free to reach/fork with improvements—or if I can help clarify the docs. I
 
 ---
 
-Made by @yowainwright, MIT 2022
+Made by [@yowainwright](https://github.com/yowainwright), MIT 2022
