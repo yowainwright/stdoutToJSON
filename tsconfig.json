@@ -1,15 +1,15 @@
 {
-  "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist",
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["esnext", "dom"],
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "checkJs": false,
-  },
-  "include": ["rollup.config.ts", "src/index.ts"],
-  "exclude": ["tests/*"]
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"outDir": "./dist",
+		"rootDir": "src",
+		"target": "esnext",
+		"module": "esnext",
+		"lib": ["esnext", "dom"],
+		"moduleResolution": "node",
+		"checkJs": false,
+		"declaration": true,
+		"strict": true
+	},
+  "exclude": ["rollup.config.ts", "tests/*"]
 }
