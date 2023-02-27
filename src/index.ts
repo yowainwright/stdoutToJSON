@@ -1,3 +1,4 @@
+import JSON5 from "json5";
 /**
  * stdoutToJSON 📇
  * @description a naive tool useful for outputting stdout as JSON
@@ -112,7 +113,7 @@ export function stdoutToJSON(
   // => JSON
   const isObject = ['{', '['].some(item => stringifiedJSONForParsing.includes(item));
   if (isObject) {
-    const parsedJSON = JSON.parse(stringifiedJSONForParsing);
+    const parsedJSON = JSON5.parse(stringifiedJSONForParsing);
     if (debug) console.debug({ parsedJSON });
     return parsedJSON;
   }
