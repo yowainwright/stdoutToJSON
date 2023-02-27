@@ -21,6 +21,7 @@
     "rollup-plugin-terser",
     "tslib",
     "typescript",
-    "vitest"
+    "vitest",
+    "json5"
   ]
 }
