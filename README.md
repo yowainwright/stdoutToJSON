@@ -393,7 +393,7 @@ nvm i && pnpm i -g && pnpm i && pnpm prepare
 
 ---
 
-The name was changed from `stdoutJSON` to `stdoutToJSON`. Thanks to [OolongHell](https://www.reddit.com/r/node/comments/tx8sxo/stdoutjson_a_simple_node_js_utility_to_make/i3njq3w/?context=3) and [Will Jacobson](https://github.com/willzjacobson) for assistance in making the reasoning and use case of this utility clearer. I still have a ways to go.
+The name was changed from `stdoutJSON` to `stdoutToJSON`. Thanks to [OolongHell](https://www.reddit.com/r/node/comments/tx8sxo/stdoutjson_a_simple_node_js_utility_to_make/i3njq3w/?context=3) for assistance in making the reasoning and use case of this utility clearer.
 
 Feel free to reach/fork with improvements—or if I can help clarify the docs. If you have a stdout string that doesn't work, please make an [issue](/issues), or submit a [pull request](/pulls) with a [test](src/__tests__/index.test.ts) and an updated [matcher](src/index.ts).  See [the setup](#local-setup) instructions. Thanks! 🤝
 
