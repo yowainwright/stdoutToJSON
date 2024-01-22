@@ -4,7 +4,7 @@
   "description": "transforms stdout to JSON 📇",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "module": "dist/index.js",
+  "module": "dist/esm/index.js",
   "files": [
     "dist"
   ],
@@ -44,9 +44,6 @@
   "devDependencies": {
     "@commitlint/cli": "18.4.4",
     "@commitlint/config-conventional": "18.4.4",
-    "@rollup/plugin-commonjs": "25.0.7",
-    "@rollup/plugin-node-resolve": "15.2.3",
-    "@rollup/plugin-typescript": "11.1.6",
     "@types/node": "20.11.5",
     "@typescript-eslint/eslint-plugin": "6.19.0",
     "@typescript-eslint/parser": "6.19.0",
