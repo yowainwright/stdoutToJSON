@@ -1,4 +1,4 @@
-import { test, expect } from "vitest";
+import assert from "assert";
 
 import { stdoutToJSON } from "../src/index";
 
@@ -31,51 +31,61 @@ export const DEFAULT_EXPECTATION = {
   cookies: [{ name: "foo", value: "1" }],
 };
 
-test("stringifiedJSON default", () => {
+const runTest = (testName, testFunction) => {
+  try {
+    testFunction();
+    console.log(`Test passed: ${testName}`);
+  } catch (error) {
+    console.error(`Test failed: ${testName}`);
+    console.error(error);
+  }
+}
+
+runTest("stringifiedJSON default", () => {
   const result = stdoutToJSON(STDOUT_MOCK);
-  expect(result).toEqual(DEFAULT_EXPECTATION);
+  assert.deepStrictEqual(result, DEFAULT_EXPECTATION);
 });
 
-test("works with trailing commas", () => {
+runTest("works with trailing commas", () => {
   const result = stdoutToJSON(STDOUT_ARRAY_MOCK);
-  expect(result).toEqual({
+  assert.deepStrictEqual(result, {
     ...DEFAULT_EXPECTATION, items: ['item1', 'item2'], test: 'true'
   });
 });
 
-test("works with simple arrays", () => {
+runTest("works with simple arrays", () => {
   const result = stdoutToJSON(STDOUT_TRAILING_COMMA_MOCK);
-  expect(result).toEqual(DEFAULT_EXPECTATION);
+  assert.deepStrictEqual(result, DEFAULT_EXPECTATION);
 });
 
-test("works with simple 1 line objects", () => {
+runTest("works with simple 1 line objects", () => {
   const result = stdoutToJSON('{ options: { isTestingCLI: true }, config: {} }\n');
-  expect(result).toEqual({ "config": {}, "options": { "isTestingCLI": "true" } });
+  assert.deepStrictEqual(result, { "config": {}, "options": { "isTestingCLI": "true" } });
 });
 
-test("works with a string only", () => {
+runTest("works with a string only", () => {
   const result = stdoutToJSON('test\n');
-  expect(result).toEqual('test');
+  assert.deepStrictEqual(result, 'test');
 });
 
-test("works with an array only", () => {
+runTest("works with an array only", () => {
   const result = stdoutToJSON('["test",]\n');
-  expect(result).toEqual(["test"]);
+  assert.deepStrictEqual(result, ["test"]);
 });
 
-test("works with a 2 dimensional array only", () => {
+runTest("works with a 2 dimensional array only", () => {
   const result = stdoutToJSON('[["foo","bar",]]\n');
-  expect(result).toEqual([["foo", "bar"]]);
+  assert.deepStrictEqual(result, [["foo", "bar"]]);
 });
 
-test("works with a 2 dimensional array and trailing comma", () => {
+runTest("works with a 2 dimensional array and trailing comma", () => {
   const result = stdoutToJSON('[["foo","bar",],]\n');
-  expect(result).toEqual([["foo", "bar"]]);
+  assert.deepStrictEqual(result, [["foo", "bar"]]);
 });
 
-test("works with an array of objects", () => {
+runTest("works with an array of objects", () => {
   const result = stdoutToJSON('[{foo:"bar"},]\n', null, true);
-  expect(result).toEqual([{ foo: "bar" }]);
+  assert.deepStrictEqual(result, [{ foo: "bar" }]);
 });
 
 /**
