@@ -9,7 +9,7 @@
     "@typescript-eslint/eslint-plugin",
     "@typescript-eslint/parser",
     "codependence",
-    "eslint",
+    { "eslint": "8.57.0" },
     "eslint-config-prettier",
     "husky",
     "is-ci",
