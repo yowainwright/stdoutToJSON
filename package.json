@@ -44,21 +44,21 @@
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
-    "@types/node": "20.14.2",
-    "@typescript-eslint/eslint-plugin": "7.13.0",
-    "@typescript-eslint/parser": "7.13.0",
+    "@types/node": "20.14.8",
+    "@typescript-eslint/eslint-plugin": "7.13.1",
+    "@typescript-eslint/parser": "7.13.1",
     "codependence": "0.3.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "9.0.11",
     "is-ci": "^3.0.1",
     "lint-staged": "15.2.7",
-    "release-it": "17.3.0",
+    "release-it": "17.4.0",
     "rimraf": "5.0.7",
     "tslib": "2.6.3",
     "tsup": "^8.0.1",
     "tsx": "^4.7.0",
-    "typescript": "5.4.5"
+    "typescript": "5.5.2"
   },
   "commitlint": {
     "extends": [
