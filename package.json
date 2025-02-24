@@ -44,9 +44,9 @@
   "devDependencies": {
     "@commitlint/cli": "19.7.1",
     "@commitlint/config-conventional": "19.7.1",
-    "@types/node": "22.13.4",
-    "@typescript-eslint/eslint-plugin": "8.24.0",
-    "@typescript-eslint/parser": "8.24.0",
+    "@types/node": "22.13.5",
+    "@typescript-eslint/eslint-plugin": "8.24.1",
+    "@typescript-eslint/parser": "8.24.1",
     "codependence": "0.3.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^10.0.1",
