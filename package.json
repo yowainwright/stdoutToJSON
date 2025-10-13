@@ -42,23 +42,23 @@
   },
   "homepage": "https://loom.com/share/6b7082bd802b43618646242477701def",
   "devDependencies": {
-    "@commitlint/cli": "20.0.0",
+    "@commitlint/cli": "20.1.0",
     "@commitlint/config-conventional": "20.0.0",
-    "@types/node": "24.5.2",
-    "@typescript-eslint/eslint-plugin": "8.44.1",
-    "@typescript-eslint/parser": "8.44.1",
+    "@types/node": "24.7.2",
+    "@typescript-eslint/eslint-plugin": "8.46.0",
+    "@typescript-eslint/parser": "8.46.0",
     "codependence": "0.3.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "9.1.7",
     "is-ci": "^4.1.0",
-    "lint-staged": "16.2.3",
+    "lint-staged": "16.2.4",
     "release-it": "19.0.5",
     "rimraf": "6.0.1",
     "tslib": "2.8.1",
     "tsup": "^8.0.1",
     "tsx": "^4.7.0",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   },
   "commitlint": {
     "extends": [
